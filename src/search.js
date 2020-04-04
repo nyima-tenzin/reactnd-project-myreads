@@ -18,7 +18,13 @@ class Search extends Component {
     handleOnChange = (e) => {
         e.preventDefault()
         this.setState({ searchText: e.target.value }, this.searchBooks)
-    } 
+    }
+    addBookToShelf = (book, shelf) => {
+        BooksAPI.update(book, shelf)
+            .then((shelf) => {
+                //console.log("response", shelf)
+             })
+    }
     render() {
         const { searchText,searchResult } = this.state
         return (
@@ -41,7 +47,7 @@ class Search extends Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        <BookshelfBooks books={searchResult} />
+                        <BookshelfBooks books={searchResult} updateBook={this.addBookToShelf}/>
                     </ol>
                 </div>
             </div>
