@@ -10,7 +10,7 @@ class BookshelfBooks extends Component {
                         <li key={book.id}>
                             <div className="book">
                                 <div className="book-top">
-                                    <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
+                                    <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url(${book.imageLinks ? book.imageLinks.smallThumbnail : ''})` }}></div>
                                     <div className="book-shelf-changer">
                                     <select>
                                         <option value="move" disabled>Move to...</option>
@@ -23,7 +23,7 @@ class BookshelfBooks extends Component {
                                 </div>
                                 <div className="book-title">{book.title}</div>
                                 <div className="book-authors">
-                                    {book.authors.map( author => (
+                                    { book.authors && book.authors.map( author => (
                                         <p key={author}>{author}</p>
                                     )) }
                                 </div>
