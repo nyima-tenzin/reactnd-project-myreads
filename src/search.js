@@ -5,17 +5,18 @@ import BookshelfBooks from './bookshelfbooks.js'
 class Search extends Component {
     state = {
         allBooks: [],
-        searchText: "",
+        searchText: '',
         searchResult: [],
     }
-    componentDidMount() {
+    fetchData = () => {
         BooksAPI.getAll()
-            .then((allBooks) => {
-                this.setState({allBooks})
-            })
+            .then(allBooks => this.setState({ allBooks }))
+    }
+    componentDidMount() {
+        this.fetchData()
     }
     addShelfToSearchResult = () => {
-        this.state.searchResult.map((book) => book.shelf)
+        this.state.searchResult.map(book => book.shelf)
     }
     searchBooks = () => {
         const { allBooks, searchText } = this.state
@@ -41,9 +42,7 @@ class Search extends Component {
     }
     addBookToShelf = (book, shelf) => {
         BooksAPI.update(book, shelf)
-            .then((shelf) => {
-                //console.log(shelf)
-             })
+            .then(shelf => this.fetchData())
     }
     render() {
         const { searchText,searchResult } = this.state

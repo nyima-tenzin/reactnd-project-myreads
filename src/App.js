@@ -4,10 +4,8 @@ import ListBooks from './listbooks.js'
 import Search from './search'
 import './App.css'
 
-class BooksApp extends React.Component {
-  render() {
-    return (
-      <div className="app">
+const BooksApp = () => (
+  <div className="app">
         <Route exact path = '/' render={() => (
           <div className="list-books">
             <div className="list-books-title">
@@ -23,8 +21,6 @@ class BooksApp extends React.Component {
         )} />
         <Route exact path='/search' render={() => (<Search />)} />
       </div>
-    )
-  }
-}
-
+)
+  
 export default BooksApp

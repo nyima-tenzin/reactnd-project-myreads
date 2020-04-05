@@ -3,29 +3,19 @@ import BookshelfBooks from './bookshelfbooks.js'
 import * as BooksAPI from './BooksAPI'
 
 class ListBooks extends Component {
-    state = {
-        books: []
-    }
-
+    state = { books: [] }
     fetchData = () => {
         BooksAPI.getAll()
             .then((books) => {
-                this.setState(() => ({
-                    books
-            }))
+                this.setState(() => ({ books }))
         })
     }
-
     componentDidMount() {
         this.fetchData()
     }
-
     updateBook = (book, shelf) => {
         BooksAPI.update(book, shelf)
-            .then((shelf) => {
-                this.fetchData()
-             })
-
+            .then(shelf => this.fetchData())
     }
     render() {
         const { books } = this.state
