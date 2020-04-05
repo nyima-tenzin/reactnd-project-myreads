@@ -3,16 +3,30 @@ import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI.js'
 import BookshelfBooks from './bookshelfbooks.js'
 class Search extends Component {
-
     state = {
-        searchText: '',
+        allBooks: [],
+        searchText: "",
         searchResult: [],
     }
+    componentDidMount() {
+        BooksAPI.getAll()
+            .then((allBooks) => {
+                this.setState({allBooks})
+            })
+    }
+    addShelfToSearchResult = () => {
+        this.state.searchResult.map((book) => book.shelf)
+    }
     searchBooks = () => {
-        const { searchText } = this.state
+        const { allBooks, searchText } = this.state
         BooksAPI.search(searchText)
-        .then((books) => {
-            !books.error ? this.setState({ searchResult: books }) : this.setState({ searchResult: [] })
+        .then((result) => {
+            Array.isArray(result) && result.map((r) => {
+                for (let b of allBooks) {
+                    if (b.id === r.id) {r.shelf = b.shelf}
+                }
+            })
+            this.setState({ searchResult: Array.isArray(result) ? result : [] }, this.addShelfToSearchResult())
         })
     }
     handleOnChange = (e) => {
@@ -22,7 +36,7 @@ class Search extends Component {
     addBookToShelf = (book, shelf) => {
         BooksAPI.update(book, shelf)
             .then((shelf) => {
-                //console.log("response", shelf)
+                //console.log(shelf)
              })
     }
     render() {

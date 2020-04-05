@@ -7,7 +7,7 @@ class ListBooks extends Component {
         books: []
     }
 
-    componentDidMount() {
+    fetchData = () => {
         BooksAPI.getAll()
             .then((books) => {
                 this.setState(() => ({
@@ -16,10 +16,14 @@ class ListBooks extends Component {
         })
     }
 
+    componentDidMount() {
+        this.fetchData()
+    }
+
     updateBook = (book, shelf) => {
         BooksAPI.update(book, shelf)
             .then((shelf) => {
-                console.log("response", shelf)
+                // console.log(shelf)
              })
 
     }
