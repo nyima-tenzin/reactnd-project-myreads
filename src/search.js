@@ -33,6 +33,12 @@ class Search extends Component {
         e.preventDefault()
         this.setState({ searchText: e.target.value }, this.searchBooks)
     }
+
+    //Added handleOnSubmit to make the search more robust incase user hit ENTER tab
+    handleOnSubmit = (e) => {
+        e.preventDefault()
+        this.setState({ searchText: e.target[0].value }, this.searchBooks)
+    }
     addBookToShelf = (book, shelf) => {
         BooksAPI.update(book, shelf)
             .then((shelf) => {
@@ -48,11 +54,10 @@ class Search extends Component {
                         Close
                     </Link>
                     <div className="search-books-input-wrapper">
-                        <form>
+                        <form onSubmit={this.handleOnSubmit}>
                             <input
                                 type="text"
                                 placeholder="Search by title or author"
-                                name="searchText"
                                 value={searchText}
                                 onChange={this.handleOnChange}
                             />
