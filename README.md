@@ -1,6 +1,8 @@
 # MyReads Project
 
-This is a simple Single Page Application built using React Library. The application let you search a book and add them to one of the shelves namely - Currently Reading, Want To Read & Read. Once you have the books on the shelves, you can also move between the shelves easily. 
+This is a simple Single Page Application built using React Library. The application let you search books and you can add them to one of the shelves namely - Currently Reading, Want To Read & Read. Once you have the books on the shelves, you can also move between the shelves easily. 
+
+The shelves display books with its image, and its title and author information underneath. 
 
 ### To get started, follow the following steps:
 
