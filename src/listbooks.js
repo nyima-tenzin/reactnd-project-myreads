@@ -23,7 +23,7 @@ class ListBooks extends Component {
     updateBook = (book, shelf) => {
         BooksAPI.update(book, shelf)
             .then((shelf) => {
-                // console.log(shelf)
+                this.fetchData()
              })
 
     }
